@@ -11,12 +11,12 @@ const input = fileContent.split('\n');
 const red= 12;
 const green = 13;
 const blue = 14; 
-let sumOfArrayIds = 0;
+let allPowers = [];
 
-const biggestNum = {
+let biggestNum = {
     green: 0,
-    red: 0,
     blue: 0,
+    red: 0
 }
 
 let lines = input.map(line => line.split(';'));
@@ -36,7 +36,7 @@ game2Array.forEach((item) => {
             let blueNumber = parseInt(item[i-1], 10);
             if(blueNumber > biggestNum.blue){
                 biggestNum.blue = blueNumber;
-            
+            }
         }
         if(item[i] === 'red,' || item[i] === 'red\r'){
             let redNumber = parseInt(item[i-1], 10);
@@ -44,11 +44,21 @@ game2Array.forEach((item) => {
                 biggestNum.red = redNumber;
             }
         }
-    } 
+    
     } 
     console.log(biggestNum)
+    let power = biggestNum.red * biggestNum.blue * biggestNum.green
+    allPowers.push(power);
+    biggestNum = {
+        green: 0,
+        red: 0,
+        blue: 0,
+    }
 })
 
-console.log(sumOfArrayIds)
+const result =allPowers.reduce((sum, power) => sum + power)
+console.log(result)
+
+
 
 //game2Array.forEach(line=> {console.log((line))})
